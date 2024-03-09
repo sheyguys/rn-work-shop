@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
-import styled from 'styled-components';
+import {FlatList} from 'react-native';
+import styled from 'styled-components/native';
 import coin from '../../mock.json';
 import CoinCard from '../components/CoinCard';
 
@@ -35,7 +35,7 @@ export interface CoinData {
   last_updated: string;
 }
 
-const ContainerCoinList = styled(SafeAreaView)`
+const ContainerCoinList = styled.SafeAreaView`
   flex: 1;
 `;
 
