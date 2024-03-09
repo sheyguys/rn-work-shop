@@ -28,7 +28,6 @@ export default function App() {
               <Button
                 onPress={() => navigation.navigate('myCoin')}
                 title="My Coin"
-                color="#fff"
               />
             ),
           })}
