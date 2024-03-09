@@ -1,7 +1,16 @@
 import React from 'react';
-import {FlatList, Image, SafeAreaView, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styled from 'styled-components';
 import coin from '../../mock.json';
+import unLikeIcon from '../assets/images/un-like.png';
+// import LikeIcon from '../assets/images/like.png';
 
 const mockCoin: CoinData[] = coin;
 
@@ -74,10 +83,24 @@ const ListCoin = () => {
         renderItem={({item}: {item: CoinData}) => (
           <CoinCard>
             <ImageCoin source={{uri: item.image}} />
-            <View>
-              <NameCoin>{item.name}</NameCoin>
-              <PriceCoin>{item.symbol.toUpperCase()}</PriceCoin>
-              <PriceCoin>{item.current_price} USD</PriceCoin>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <View>
+                <NameCoin>{item.name}</NameCoin>
+                <PriceCoin>{item.symbol.toUpperCase()}</PriceCoin>
+                <PriceCoin>{item.current_price} USD</PriceCoin>
+              </View>
+              <TouchableOpacity
+                style={{
+                  justifyContent: 'center',
+                  paddingRight: 20,
+                }}>
+                <Image source={unLikeIcon} style={{width: 30, height: 26}} />
+              </TouchableOpacity>
             </View>
           </CoinCard>
         )}
