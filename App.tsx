@@ -2,7 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
 import {Button} from 'react-native';
-import ListCoin from './src/screens/ListCoin';
+import CoinList from './src/screens/CoinList';
 import MyCoin from './src/screens/MyCoin';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="listCoin">
         <Stack.Screen
           name="listCoin"
-          component={ListCoin}
+          component={CoinList}
           options={({navigation}) => ({
             title: 'List Coin',
             headerStyle: {
@@ -35,7 +35,16 @@ export default function App() {
         <Stack.Screen
           name="myCoin"
           component={MyCoin}
-          options={{title: 'My Coin'}}
+          options={{
+            title: 'My Coin',
+            headerStyle: {
+              backgroundColor: '#2E2D3D',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
