@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import unLikeIcon from '../assets/images/un-like.png';
 import likeIcon from '../assets/images/like.png';
-import {CoinData} from '../screens/CoinList';
+import type {CoinData} from '../services/coingecko';
 
 const ContainerCard = styled.View`
   display: flex;
