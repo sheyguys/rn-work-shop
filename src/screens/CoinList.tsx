@@ -1,25 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import React, {FC, useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import CoinCard from '../components/CoinCard';
-import {CoinData, getCoinList} from '../services/coingecko';
+import type {CoinData} from '../services/coingecko';
+import coinActions from '../stores/coins/actions';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 
 const ContainerCoinList = styled.SafeAreaView`
   flex: 1;
 `;
 
-const CoinList = () => {
-  const [listLike, setListLike] = useState<string[]>([]);
-  const [listCoin, setListCoin] = useState<CoinData[]>([]);
+interface CoinListOwnProps {
+  navigation: NavigationProp<ParamListBase>;
+}
 
-  const fetchCoinList = async () => {
-    const response = await getCoinList();
-    setListCoin(response);
-  };
+const CoinList: FC<CoinListProps> = props => {
+  const {listCoin, fetchCoinList} = props;
+  const [listLike, setListLike] = useState<string[]>([]);
 
   useEffect(() => {
     fetchCoinList();
-  }, []);
+  }, [fetchCoinList]);
 
   const onLike = (coinSymbol: string) => {
     setListLike([...listLike, coinSymbol]);
@@ -43,4 +45,33 @@ const CoinList = () => {
   );
 };
 
-export default CoinList;
+interface CoinListStateProps {
+  listCoin: CoinData[];
+}
+
+const mapStateToProps = (state: any): CoinListStateProps => {
+  return {
+    listCoin: state.coin.listCoin,
+  };
+};
+
+interface CoinListDispatchProps {
+  fetchCoinList: typeof coinActions.fetchCoinList;
+}
+
+const mapDispatchToProps: CoinListDispatchProps = {
+  fetchCoinList: coinActions.fetchCoinList,
+};
+
+export type CoinListProps = CoinListStateProps &
+  CoinListDispatchProps &
+  CoinListOwnProps;
+
+export default connect<
+  CoinListStateProps,
+  CoinListDispatchProps,
+  CoinListOwnProps
+>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CoinList);

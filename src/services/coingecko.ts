@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type {Dispatch} from 'redux';
 
 const coingeckoCli = axios.create({
   baseURL: 'https://api.coingecko.com/api/v3',
@@ -33,7 +34,7 @@ export interface CoinData {
   last_updated: string;
 }
 
-export const getCoinList = async (): Promise<CoinData[]> => {
+export const getCoinList = async (dispatch: Dispatch) => {
   const {data} = await coingeckoCli.get<CoinData[]>('/coins/markets', {
     params: {
       page: 1,
@@ -41,5 +42,6 @@ export const getCoinList = async (): Promise<CoinData[]> => {
       vs_currency: 'usd',
     },
   });
-  return data;
+
+  dispatch({type: 'SET_COIN_LIST_SUCCESS', payload: data});
 };
