@@ -62,11 +62,17 @@ const CoinCard = ({
       <ImageCoin source={{uri: coin.image}} />
       <WrapContentCoin>
         <View>
-          <NameCoin>{coin.name}</NameCoin>
-          <PriceCoin>{coin.symbol.toUpperCase()}</PriceCoin>
-          <PriceCoin>{coin.current_price} USD</PriceCoin>
+          <NameCoin accessibilityLabel="name">{coin.name}</NameCoin>
+          <PriceCoin accessibilityLabel="symbol">
+            {coin.symbol.toUpperCase()}
+          </PriceCoin>
+          <PriceCoin accessibilityLabel="price">
+            {coin.current_price} USD
+          </PriceCoin>
         </View>
-        <ContainerButtonLike onPress={() => onLike(coin.symbol)}>
+        <ContainerButtonLike
+          onPress={() => onLike(coin.symbol)}
+          accessibilityRole="button">
           <ImageButtonLike source={like ? likeIcon : unLikeIcon} />
         </ContainerButtonLike>
       </WrapContentCoin>
