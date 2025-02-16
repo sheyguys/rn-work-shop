@@ -1,9 +1,8 @@
-// components/CustomInput.tsx
 import React from 'react';
 import {TextInput, View, Text, StyleSheet} from 'react-native';
 
 interface CustomInputProps {
-  label?: string;
+  label: string;
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;
@@ -32,12 +31,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         placeholderTextColor="#888"
-        accessibilityLabel={label || placeholder}
+        accessibilityLabel={label}
         accessibilityHint="Double tap to enter text"
-        accessibilityRole="text"
       />
       {error && (
-        <Text style={styles.errorText} accessibilityLiveRegion="assertive">
+        <Text
+          accessibilityLabel="error message"
+          style={styles.errorText}
+          accessibilityLiveRegion="assertive">
           {error}
         </Text>
       )}

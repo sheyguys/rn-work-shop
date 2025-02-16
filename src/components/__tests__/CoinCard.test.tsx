@@ -21,13 +21,14 @@ describe('CoinCard Component', () => {
     expect(getByRole('text', {name: 'price'})).toHaveTextContent('45000 USD');
   });
 
-  test('calls onLike function when button is pressed', () => {
+  test('calls onLike function when button is pressed', async () => {
     const fakeOnLike = jest.fn();
     const {getByRole} = render(
       <CoinCard coin={fakeCoin} like={false} onLike={fakeOnLike} />,
     );
 
     fireEvent.press(getByRole('button'));
+
     expect(fakeOnLike).toHaveBeenCalledWith('btc');
   });
 });
